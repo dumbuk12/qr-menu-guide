@@ -1,0 +1,3 @@
+Drop your photos here (logo.png, item photos referenced from menu-data.js).
+Recommended: square, ~600x600px. See scripts/prepare-photo.py to auto-crop
+and center product photos, and README.md's "Photos" section for tips.

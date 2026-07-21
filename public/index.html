@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Restaurant Name — Menu</title>
+<meta name="theme-color" content="#343c17" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  /* ---------- Theme — change these 6 values to reskin the whole page ---------- */
+  :root {
+    --olive-deep: #343c17;   /* page background */
+    --olive: #4b5626;        /* item photo placeholder background */
+    --cream: #f2eedd;        /* primary text */
+    --cream-soft: #c9c8ad;   /* secondary text (descriptions, tagline) */
+    --gold: #cfa75e;         /* accent: prices, active states, focus rings */
+    --line: #64703a;         /* hairlines / dividers */
+    --display: "Cormorant Garamond", Georgia, serif;
+    --body: "Karla", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    background: var(--olive-deep);
+    color: var(--cream);
+    font-family: var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Header with logo ---------- */
+  header {
+    text-align: center;
+    padding: 2.5rem 1.25rem 1.75rem;
+    background:
+      radial-gradient(ellipse at top, rgba(207,167,94,0.12), transparent 60%),
+      var(--olive-deep);
+  }
+  header .logo {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  }
+  header h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    letter-spacing: 0.02em;
+    margin-top: 1rem;
+  }
+  header .tagline {
+    margin-top: 0.35rem;
+    color: var(--cream-soft);
+    font-size: 0.85rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  header .rule {
+    width: 64px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.1rem auto 0;
+  }
+
+  /* ---------- Sticky category nav ---------- */
+  /* Pills are 44px tall — the accessibility-minimum tap target size for mobile. */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--olive-deep) 90%, transparent);
+    backdrop-filter: blur(8px);
+    border-block: 1px solid var(--line);
+    display: flex;
+    gap: 0.25rem;
+    overflow-x: auto;
+    padding: 0.6rem 1rem;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: none;
+    color: var(--cream-soft);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0 0.9rem;
+    border-radius: 999px;
+    transition: color 0.15s, background 0.15s;
+  }
+  nav a.active, nav a:hover {
+    color: var(--olive-deep);
+    background: var(--gold);
+  }
+  nav a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  /* ---------- Menu sections ---------- */
+  main { max-width: 640px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+  section { padding-top: 2.5rem; scroll-margin-top: 4rem; }
+  section h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.7rem;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  section h2::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  section .cat-note {
+    margin-top: 0.4rem;
+    color: var(--gold);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  .item {
+    padding: 1.05rem 0;
+    display: flex;
+    gap: 0.9rem;
+    align-items: center; /* keeps the photo vertically centered against the text block */
+  }
+  .item + .item { border-top: 1px dashed var(--line); }
+  .item .thumb {
+    flex: 0 0 auto;
+    width: 96px;
+    height: 96px;
+    border-radius: 12px;
+    object-fit: cover;
+    background: var(--olive);
+    border: 1px solid var(--line);
+  }
+  .item .content { flex: 1; min-width: 0; }
+  .item .row { display: flex; align-items: baseline; gap: 0.5rem; }
+  .item .name { font-weight: 700; font-size: 1rem; letter-spacing: 0.01em; }
+  .item .leader {
+    flex: 1;
+    border-bottom: 2px dotted var(--line);
+    transform: translateY(-4px);
+  }
+  .item .price {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .item .desc {
+    margin-top: 0.3rem;
+    color: var(--cream-soft);
+    font-size: 0.87rem;
+    line-height: 1.45;
+    max-width: 52ch;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--cream-soft);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    padding: 2rem 1rem 3rem;
+    border-top: 1px solid var(--line);
+  }
+  footer .mark {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .status { text-align: center; color: var(--cream-soft); padding: 3rem 1rem; }
+</style>
+</head>
+<body>
+  <header>
+    <img class="logo" id="logo" src="/images/logo.png" alt="Restaurant logo" onerror="this.style.display='none'" />
+    <h1 id="restaurant-name">Your Restaurant Name</h1>
+    <p class="tagline" id="restaurant-tagline"></p>
+    <div class="rule"></div>
+  </header>
+
+  <nav id="category-nav" aria-label="Menu categories"></nav>
+
+  <main id="menu">
+    <p class="status">Loading menu…</p>
+  </main>
+
+  <footer>
+    <div class="mark">Your Restaurant Name</div>
+    Prices include tax · Ask staff about allergens
+  </footer>
+
+<script>
+  // Fallback data, used only if /api/menu can't be reached (e.g. offline).
+  // Regenerate this after every menu-data.js edit — see scripts/publish.mjs,
+  // which does it automatically, or run:
+  //   node -e "import('./menu-data.js').then(({menu}) => console.log(JSON.stringify(menu)))"
+  window.__FALLBACK__ = {"restaurant":"Your Restaurant Name","tagline":"A short tagline goes here","logo":"/images/logo.png","currency":"$","categories":[{"name":"Favorites","note":"Chef's picks","items":[{"name":"Margherita Pizza","price":14,"desc":"San Marzano tomato, fresh mozzarella, basil, olive oil"},{"name":"Grilled Salmon","price":22,"desc":"Lemon butter sauce, seasonal vegetables"}]},{"name":"Starters","items":[{"name":"Bruschetta","price":8,"image":"/images/bruschetta.jpg","desc":"Grilled bread, tomato, garlic, basil"},{"name":"Soup of the Day","price":7}]},{"name":"Mains","note":"Served with a side of your choice","items":[{"name":"Margherita Pizza","price":14,"desc":"San Marzano tomato, fresh mozzarella, basil, olive oil"},{"name":"Grilled Salmon","price":22,"desc":"Lemon butter sauce, seasonal vegetables"},{"name":"Mushroom Risotto","price":16,"desc":"Arborio rice, wild mushrooms, parmesan"}]},{"name":"Drinks","items":[{"name":"Orange Juice","price":4,"image":"/images/orange-juice.jpg"},{"name":"Sparkling Water","price":3},{"name":"Espresso","price":3}]}]};
+
+  const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+  function render(data) {
+    document.getElementById("restaurant-name").textContent = data.restaurant;
+    document.getElementById("restaurant-tagline").textContent = data.tagline || "";
+    document.title = data.restaurant + " — Menu";
+    if (data.logo) document.getElementById("logo").src = data.logo;
+    const cur = data.currency || "$";
+
+    const nav = document.getElementById("category-nav");
+    const main = document.getElementById("menu");
+    nav.innerHTML = "";
+    main.innerHTML = "";
+
+    for (const cat of data.categories) {
+      const id = slug(cat.name);
+
+      const link = document.createElement("a");
+      link.href = "#" + id;
+      link.textContent = cat.name;
+      link.dataset.target = id;
+      nav.appendChild(link);
+
+      const section = document.createElement("section");
+      section.id = id;
+      const h2 = document.createElement("h2");
+      h2.textContent = cat.name;
+      section.appendChild(h2);
+      if (cat.note) {
+        const note = document.createElement("p");
+        note.className = "cat-note";
+        note.textContent = cat.note;
+        section.appendChild(note);
+      }
+
+      for (const item of cat.items) {
+        const div = document.createElement("div");
+        div.className = "item";
+
+        const content = document.createElement("div");
+        content.className = "content";
+
+        const row = document.createElement("div");
+        row.className = "row";
+        const name = document.createElement("span");
+        name.className = "name";
+        name.textContent = item.name;
+        const leader = document.createElement("span");
+        leader.className = "leader";
+        const price = document.createElement("span");
+        price.className = "price";
+        // Prefix works for most currencies ($14, €14). If yours is
+        // conventionally postfixed (14₺, 14kr), swap to `item.price + cur`.
+        price.textContent = cur + item.price;
+        row.append(name, leader, price);
+        content.appendChild(row);
+
+        if (item.desc) {
+          const desc = document.createElement("p");
+          desc.className = "desc";
+          desc.textContent = item.desc;
+          content.appendChild(desc);
+        }
+
+        div.appendChild(content);
+
+        if (item.image) {
+          const img = document.createElement("img");
+          img.className = "thumb";
+          img.src = item.image;
+          img.alt = item.name;
+          img.loading = "lazy";
+          img.onerror = () => img.remove();
+          div.prepend(img);
+        }
+
+        section.appendChild(div);
+      }
+
+      main.appendChild(section);
+    }
+
+    const links = [...nav.querySelectorAll("a")];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            links.forEach((l) =>
+              l.classList.toggle("active", l.dataset.target === entry.target.id)
+            );
+          }
+        }
+      },
+      { rootMargin: "-35% 0px -60% 0px" }
+    );
+    main.querySelectorAll("section").forEach((s) => observer.observe(s));
+  }
+
+  async function load() {
+    try {
+      const res = await fetch("/api/menu");
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      render(await res.json());
+    } catch {
+      render(window.__FALLBACK__ || { restaurant: "Your Restaurant Name", categories: [] });
+    }
+  }
+  load();
+</script>
+</body>
+</html>
