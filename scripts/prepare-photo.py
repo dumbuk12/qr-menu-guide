@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """
+QR Menu Guide — https://github.com/dumbuk12/qr-menu-guide
+Copyright (c) 2026 dumbuk12 — MIT License
+
 Crop a product photo to a centered square thumbnail, matching the sizing
 used by public/images/*.jpg in this project (square, object-fit: cover).
 

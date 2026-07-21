@@ -1,5 +1,7 @@
 # QR Menu Guide
 
+*by [dumbuk12](https://github.com/dumbuk12) · [MIT licensed](./LICENSE)*
+
 A minimal, fast, no-database QR code restaurant menu — one JS file for your
 menu content, one HTML file for the page, deployed as a single Cloudflare
 Worker. No CMS, no build step, no monthly hosting bill.
@@ -299,5 +301,6 @@ printed QR codes never go stale even if you change hosting later.
 
 ## License
 
-MIT — use this for your own menu, fork it, strip the guide out and keep just
-the code, whatever's useful.
+Copyright (c) 2026 [dumbuk12](https://github.com/dumbuk12) — [MIT](./LICENSE).
+Use this for your own menu, fork it, strip the guide out and keep just the
+code, whatever's useful — just keep the copyright notice per the MIT terms.

@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+// QR Menu Guide — https://github.com/dumbuk12/qr-menu-guide
+// Copyright (c) 2026 dumbuk12 — MIT License
+//
 // One-command publish: sync fallback data, commit + push to GitHub, then deploy to Cloudflare.
 // Usage: npm run publish -- "commit message"
 import { execSync } from "node:child_process";

@@ -1,3 +1,6 @@
+// QR Menu Guide — https://github.com/dumbuk12/qr-menu-guide
+// Copyright (c) 2026 dumbuk12 — MIT License
+//
 // Your menu, in one place. Edit THIS file to change items, prices, or photos —
 // the page and the /api/menu endpoint both read from here automatically.
 //
